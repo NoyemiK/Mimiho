@@ -122,7 +122,6 @@ class TitleState extends GameState {
   void input_left() {}
   void input_right() {}
   void input_confirm() {
-    game.new_game_screen.char_info = game.player.get_info();
     GameStates[] n = { GameStates.NEW_GAME, GameStates.FILE, GameStates.QUIT };
     game.current_state = n[selection_index];
   }
@@ -160,8 +159,8 @@ class NewGameState extends GameState {
         text(options[i], 12, 32 + (i * 16));
         fill( 0xFF, 0xFF, 0xFF );
       }
-      image(game.player.portraits[game.player.portrait], 24, 128);
-      text(char_info, 16, 284);
+      game.player.playable_characters[game.player.character].draw_portrait(24, 128);
+      //text(char_info, 16, 284);
     }
     
     void input(String signal) {
@@ -219,7 +218,6 @@ class NewGameState extends GameState {
   void char_toggle() {
     if (selection_index < 2) {
       game.player.set_character(selection_index);
-      char_info = new String(game.player.get_info());
     }
   }
   void input_cancel() { 

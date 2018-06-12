@@ -19,21 +19,9 @@ class Entity {
 }
 
 class Player extends Entity {
-  PImage[] portrait_strip = {
-    loadImage("graphics/amihailu_big.png"),
-    loadImage("graphics/kekolu_big.png")
-  };
-  PImage[] portraits = new PImage[8];
-  String[] amihailu_outfit_names = {
-    "Comfy Set", "Dreamland Set", "Winter Set", "Roundhouse Set",
-    "Misha Bullying Set", "Dugashoba-munja Set", "Queen Saul Set", "Comfier Set"
-  };
-  String[] kekolu_outfit_names = {
-    "Clear Diamond Set", "Pink Diamond Set", "Showgirl-Bunny Set", "Snowy Bunny Set",
-    "Sunset Bunny Set", "Close Quarter Bunny Set", "Designated-Marksbunny Set", "Sleepy Bunny Set"
-  };
   int portrait;
   int character;
+  PlayerCharacter[] playable_characters = { new PlayerCharacter(1), new PlayerCharacter(2) };
   
   Player() {
     
@@ -43,31 +31,64 @@ class Player extends Entity {
   }
   
   public void set_character(int selection) {
-    if (selection != 0) {
-      character = 1;
-      set_portrait();
-    }
-    else {
-      character = 0;
-      set_portrait();
-    }
+    character = selection;
   }
   
-  private void set_portrait() {
-    for(int i = 0; i < 8; i++) {
-      portraits[i] = portrait_strip[character].get(i * 48, 0, 48, 128);
-    } 
+}
+
+class PlayerCharacter {
+  PImage portrait_strip;
+  PImage[] portraits = new PImage[8];
+  String[] outfit_names = new String[8];
+  String char_info;
+  String character_name;
+  
+  PlayerCharacter(int choice) {
+    switch (choice) {
+      case 1:
+        generate_amihailu();
+        break;
+      case 2:
+        generate_kekolu();
+        break;
+    }
+    print(character_name);
   }
   
   public String get_info() {
     String info;
-    if (character == 0) {
-      info = new String("Amihailu Dugashoba\nOUTFIT: " + amihailu_outfit_names[portrait] + "\nOUTFIT PERK: [" + "]\n");
-    }
-    else {
-      info = new String("Kekolu Chuudai\nOUTFIT: " + amihailu_outfit_names[portrait] + "\nOUTFIT PERK: [" + "]\n");
-    }
+    info = new String( character_name + "\nOUTFIT: " + outfit_names[game.player.portrait] + "\nOUTFIT PERK: [" + "]\n");
     
     return info;
+  }
+  
+  public void draw_portrait(int x, int y) {
+    image(portraits[game.player.portrait], x, y);
+  }
+  
+  private void generate_amihailu() {
+    character_name = "Amihailu Dugashoba";
+    portrait_strip = loadImage("graphics/amihailu_big.png");
+    String[] names = {
+      "Comfy Set", "Dreamland Set", "Winter Set", "Roundhouse Set",
+      "Misha Bullying Set", "Dugashoba-munja Set", "Queen Saul Set", "Comfier Set"
+    };
+    for (int i = 0; i < 8; i++) {
+      outfit_names[i] = names[i];
+      portraits[i] = portrait_strip.get(i * 48, 0, 48, 128);
+    }
+  }
+  
+  private void generate_kekolu() {
+    character_name = "Kekolu Chuudai";
+    portrait_strip = loadImage("graphics/kekolu_big.png");
+    String[] names = {
+      "Clear Diamond Set", "Pink Diamond Set", "Showgirl-Bunny Set", "Snowy Bunny Set",
+      "Sunset Bunny Set", "Close Quarter Bunny Set", "Designated-Marksbunny Set", "Sleepy Bunny Set"
+    };
+    for (int i = 0; i < 8; i++) {
+      outfit_names[i] = names[i];
+      portraits[i] = portrait_strip.get(i * 48, 0, 48, 128);
+    }
   }
 }
