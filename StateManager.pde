@@ -45,11 +45,6 @@ class Game {
         break;
     }
   }
-  
-  void refresh_player() {
-    player = null;
-    player = new Player();
-  }
 }
 
 abstract class GameState {
@@ -124,6 +119,7 @@ class TitleState extends GameState {
   void input_confirm() {
     GameStates[] n = { GameStates.NEW_GAME, GameStates.FILE, GameStates.QUIT };
     game.current_state = n[selection_index];
+    game.new_game_screen.init();
   }
   void input_cancel() { init(); }
   
@@ -143,7 +139,7 @@ class NewGameState extends GameState {
     }
     
     void init() {
-      
+      game.player.playable_characters[game.player.character].get_info();
     }
     
     void end() {
@@ -160,7 +156,7 @@ class NewGameState extends GameState {
         fill( 0xFF, 0xFF, 0xFF );
       }
       game.player.playable_characters[game.player.character].draw_portrait(24, 128);
-      //text(char_info, 16, 284);
+      text(game.player.playable_characters[game.player.character].char_info.toString(), 16, 284);
     }
     
     void input(String signal) {
@@ -218,12 +214,10 @@ class NewGameState extends GameState {
   void char_toggle() {
     if (selection_index < 2) {
       game.player.set_character(selection_index);
+      game.player.playable_characters[game.player.character].get_info();
     }
   }
   void input_cancel() { 
     game.current_state = GameStates.TITLE;
-    game.title_screen.init();
-    game.new_game_screen = null;
-    game.new_game_screen = new NewGameState();
   }
 }

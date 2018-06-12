@@ -36,11 +36,16 @@ class Player extends Entity {
   
 }
 
+
+//===========================
+//  Additional Classes
+//===========================
+
 class PlayerCharacter {
   PImage portrait_strip;
   PImage[] portraits = new PImage[8];
   String[] outfit_names = new String[8];
-  String char_info;
+  StringBuilder char_info;
   String character_name;
   
   PlayerCharacter(int choice) {
@@ -52,14 +57,14 @@ class PlayerCharacter {
         generate_kekolu();
         break;
     }
-    print(character_name);
+    char_info = new StringBuilder(character_name);
   }
   
-  public String get_info() {
-    String info;
-    info = new String( character_name + "\nOUTFIT: " + outfit_names[game.player.portrait] + "\nOUTFIT PERK: [" + "]\n");
-    
-    return info;
+  public void get_info() {
+    char_info.setLength(character_name.length());
+    char_info.append("\nOUTFIT: ");
+    char_info.append(outfit_names[game.player.portrait]);
+    char_info.append("\n OUTFIT PERK: []");
   }
   
   public void draw_portrait(int x, int y) {
@@ -83,7 +88,7 @@ class PlayerCharacter {
     character_name = "Kekolu Chuudai";
     portrait_strip = loadImage("graphics/kekolu_big.png");
     String[] names = {
-      "Clear Diamond Set", "Pink Diamond Set", "Showgirl-Bunny Set", "Snowy Bunny Set",
+      "Sugar Bunny Set", "Sunrise Bunny Set", "Service Bunny Set", "Snowy Bunny Set",
       "Sunset Bunny Set", "Close Quarter Bunny Set", "Designated-Marksbunny Set", "Sleepy Bunny Set"
     };
     for (int i = 0; i < 8; i++) {
