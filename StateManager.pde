@@ -45,6 +45,11 @@ class Game {
         break;
     }
   }
+  
+  void refresh_player() {
+    player = null;
+    player = new Player();
+  }
 }
 
 abstract class GameState {
@@ -98,6 +103,9 @@ class TitleState extends GameState {
       case "CONFIRM":
         input_confirm();
         break;
+      case "CANCEL":
+        input_cancel();
+        break;
     }
   }
   
@@ -118,7 +126,7 @@ class TitleState extends GameState {
     GameStates[] n = { GameStates.NEW_GAME, GameStates.FILE, GameStates.QUIT };
     game.current_state = n[selection_index];
   }
-  void input_cancel() {}
+  void input_cancel() { init(); }
   
 }
 
@@ -173,6 +181,9 @@ class NewGameState extends GameState {
       case "CONFIRM":
         input_confirm();
         break;
+      case "CANCEL":
+        input_cancel();
+        break;
     }
   }
   
@@ -208,8 +219,13 @@ class NewGameState extends GameState {
   void char_toggle() {
     if (selection_index < 2) {
       game.player.set_character(selection_index);
-      char_info = game.player.get_info();
+      char_info = new String(game.player.get_info());
     }
   }
-  void input_cancel() {}
+  void input_cancel() { 
+    game.current_state = GameStates.TITLE;
+    game.title_screen.init();
+    game.new_game_screen = null;
+    game.new_game_screen = new NewGameState();
+  }
 }

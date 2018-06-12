@@ -21,6 +21,7 @@ void draw() {
 
 void keyPressed() {
   if (key == 'z') { game.input("CONFIRM"); }
+  if (key == 'x') { game.input("CANCEL"); }
   else if (key == CODED) {
     if (keyCode == UP) { game.input("UP"); }
     if (keyCode == DOWN) { game.input("DOWN"); }
