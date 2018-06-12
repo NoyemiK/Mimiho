@@ -4,7 +4,7 @@ Game game;
 PFont regular_font;
 
 void setup() {
-  size(600,400);
+  size(640,400);
   frameRate(60);
   regular_font = loadFont("regular.vlw");
   textFont(regular_font);
@@ -12,7 +12,7 @@ void setup() {
 }
 
 void draw() {
-  background(0x22, 0x00, 0x11);
+  background(0x22, 0x22, 0x22);
   game.update();
   
   //Debug info
