@@ -16,6 +16,8 @@ A grand extension of the java port of *Pimiko* that features gamestates, items, 
 
 ### Gameplay
 
+- Choice of two player characters, Amihailu and Kekolu
+
 `This section is a stub. As features are completed, this section will be updated.`
 
 ### TODO
