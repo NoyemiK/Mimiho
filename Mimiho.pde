@@ -16,11 +16,12 @@ void draw() {
   game.update();
   
   //Debug info
-  text("FPS: " + (int) frameRate, 0, 24);
+  //text("FPS: " + (int) frameRate, 0, 24);
 }
 
 void keyPressed() {
-  if (key == CODED) {
+  if (key == 'z') { game.input("CONFIRM"); }
+  else if (key == CODED) {
     if (keyCode == UP) { game.input("UP"); }
     if (keyCode == DOWN) { game.input("DOWN"); }
     if (keyCode == LEFT) { game.input("LEFT"); }
