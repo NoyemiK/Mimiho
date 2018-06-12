@@ -1,5 +1,6 @@
 class Entity {
   int hit_points, armour_points, strength, speed;
+  int max_hit_points, max_armour_points;
   IntDict skill_table;
   boolean alive;
   
@@ -25,7 +26,7 @@ class Player extends Entity {
   Player() {
     
     //Setup the portrait graphics
-    portrait = 6;
+    portrait = 0;
     portrait_strip = loadImage("graphics/amihailu_big.png");
     for(int i = 0; i < 8; i++)
       portraits[i] = portrait_strip.get(i * 48, 0, 48, 128);

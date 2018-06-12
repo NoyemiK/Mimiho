@@ -20,7 +20,6 @@ class Game {
     switch (current_state) {
       case TITLE:
         title_screen.update();
-        image(player.portraits[title_screen.selection_index], 0, 0);
         break;
     }
   }
@@ -43,8 +42,13 @@ abstract class GameState {
   
 }
 
+//========================
+// STATE LOGIC
+//========================
+
 class TitleState extends GameState {
   public int selection_index;
+  public String[] options = { "New Game", "Load Game", "Exit" };
   
   TitleState() {
     selection_index = 0;
@@ -59,7 +63,11 @@ class TitleState extends GameState {
   }
   
   void update() {
-    
+    for ( int i = 0; i < options.length; i++ ) {
+      if (i == selection_index) { fill( 0xCC, 0x33, 0x55 ); }
+      text(options[i], width/2 - 120, (height/2 - 48) + (i * 16));
+      fill( 0xFF, 0xFF, 0xFF );
+    }
   }
   
   void input(String signal) {
