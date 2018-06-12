@@ -128,7 +128,7 @@ class TitleState extends GameState {
 class NewGameState extends GameState {
   public int selection_index;
   public String[] options = { "Start Game as Amihailu", "Start Game as Kekolu",
-    "Option: Pimiko Mode | Increase attributes at Lumpee's shop     | ",
+    "Option: Pimiko Mode | Level up thru Lumpee's Magic Shop        | ",
     "Option: Mimi's Ward | Disable Hunter-type AI package           | ",
     "Option: Magazines   | Weapons require reloading (1 Turn Point) | " };
   public char[] game_options = { 'N', 'N', 'N' };
