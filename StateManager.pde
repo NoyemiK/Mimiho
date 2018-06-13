@@ -49,8 +49,6 @@ class Game {
 
 abstract class GameState {
   
-  abstract void init();
-  abstract void end();
   abstract void update();
   abstract void input(String signal);
   
@@ -68,14 +66,6 @@ class TitleState extends GameState {
   TitleState() {
     selection_index = 0;
     title_card = loadImage("graphics/title_card.png");
-  }
-  
-  void init() {
-    
-  }
-  
-  void end() {
-    
   }
   
   void update() {
@@ -98,9 +88,6 @@ class TitleState extends GameState {
       case "CONFIRM":
         input_confirm();
         break;
-      case "CANCEL":
-        input_cancel();
-        break;
     }
   }
   
@@ -121,7 +108,6 @@ class TitleState extends GameState {
     game.current_state = n[selection_index];
     game.new_game_screen.init();
   }
-  void input_cancel() { init(); }
   
 }
 
