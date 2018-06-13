@@ -21,6 +21,7 @@ class Game {
   
   void push_gamestate(GameState state) {
     gamestate_stack.add(state);
+    System.gc();
   }
   
   void pop_gamestate() {
