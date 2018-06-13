@@ -27,9 +27,18 @@ class Game {
   void pop_gamestate() {
     gamestate_stack.remove(gamestate_stack.size() - 1);
   }
+  
+  void draw_options(String[] options, int selection_index, int x, int y) {
+    for ( int i = 0; i < options.length ; i++ ) {
+      if (i == selection_index) { fill( 0xCC, 0x33, 0x55 ); }
+      text(options[i], x, y + (i * 16));
+      fill( 0xFF, 0xFF, 0xFF );
+    }
+  }
 }
 
 interface GameState {
+  int selection_index = 0;
   
   void update();
   void input(String signal);
@@ -42,7 +51,9 @@ interface GameState {
 
 class TitleState implements GameState {
   public int selection_index;
-  public String[] options = { "New Game", "Load Game", "Exit" };
+  public String[] options = { 
+    "New Game", "File Menu", "Exit" 
+  };
   private PImage title_card;
   
   TitleState() {
@@ -55,11 +66,7 @@ class TitleState implements GameState {
   
   void update() {
     image(title_card, 0, 0);
-    for ( int i = 0; i < options.length ; i++ ) {
-      if (i == selection_index) { fill( 0xCC, 0x33, 0x55 ); }
-      text(options[i], width/2 - 120, (height/2 + 48) + (i * 16));
-      fill( 0xFF, 0xFF, 0xFF );
-    }
+    game.draw_options(options, selection_index, (width/2) - 120, (height/2) + 48);
   }
   
   void input(String signal) {
@@ -94,6 +101,7 @@ class TitleState implements GameState {
         game.push_gamestate(new NewGameState());
         break;
       case 1:
+        game.push_gamestate(new FileMenu());
         break;
       case 2:
         exit();
@@ -105,10 +113,12 @@ class TitleState implements GameState {
 
 class NewGameState implements GameState {
   public byte selection_index;
-  public String[] options = { "Start Game as Amihailu", "Start Game as Kekolu",
+  public String[] options = { 
+    "Start Game as Amihailu", "Start Game as Kekolu",
     "Option: Pimiko Mode | Level up thru Lumpee's Magic Shop        | ",
     "Option: Mimi's Ward | Disable Hunter-type AI package           | ",
-    "Option: Magazines   | Weapons require reloading (1 Turn Point) | " };
+    "Option: Magazines   | Weapons require reloading (1 Turn Point) | " 
+  };
   public char[] game_options = { 'N', 'N', 'N' };
   String char_info;
     
@@ -125,12 +135,10 @@ class NewGameState implements GameState {
     }
     
     void update() {
-      for ( int i = 0; i < options.length; i++ ) {
+      game.draw_options(options, selection_index, 12, 32);
+      for ( int i = 2; i < options.length; i++ ) {
         if (i == selection_index) { fill( 0xCC, 0x33, 0x55 ); }
-          if (i > 1) {
-            text(game_options[i - 2], 532, 32 + (i * 16));
-          }
-        text(options[i], 12, 32 + (i * 16));
+        text(game_options[i - 2], 532, 32 + (i * 16));
         fill( 0xFF, 0xFF, 0xFF );
       }
       game.player.playable_characters[game.player.character].draw_portrait(24, 128);
@@ -198,4 +206,24 @@ class NewGameState implements GameState {
   void input_cancel() { 
     game.pop_gamestate();
   }
+}
+
+class FileMenu implements GameState {
+  int selection_index = 0;
+  public String[] options = {
+    "Load a saved game", "Delete a saved game", "Reset persistent data"
+  };
+  
+  FileMenu () {
+    
+  }
+  
+  void update(){
+    
+  }
+  
+  void input(String signal){
+    game.pop_gamestate();
+  }
+  
 }
