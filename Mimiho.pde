@@ -5,14 +5,13 @@ PFont regular_font;
 boolean debug_mode;
 
 void setup() {
-  debug_mode = true;
+  debug_mode = false;
   size(640,400);
   frameRate(60);
   regular_font = loadFont("regular.vlw");
   textFont(regular_font);
   game = new Game();
   
-  if (debug_mode) { gen_progression_table(); }
 }
 
 void draw() {
@@ -20,7 +19,9 @@ void draw() {
   game.update();
   
   //Debug info
-  //text("FPS: " + (int) frameRate, 0, 24);
+  if (debug_mode) {
+    text("FPS: " + (int) frameRate, 0, 24);
+  }
 }
 
 void keyPressed() {

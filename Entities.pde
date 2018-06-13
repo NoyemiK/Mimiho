@@ -1,6 +1,6 @@
 class Entity {
-  int hit_points, armour_points, strength, speed;
-  int max_hit_points, max_armour_points;
+  short hit_points, armour_points, strength, speed;
+  short max_hit_points, max_armour_points;
   IntDict skill_table;
   boolean alive;
   
@@ -19,7 +19,7 @@ class Entity {
 }
 
 class Player extends Entity {
-  int portrait;
+  byte portrait;
   int character;
   PlayerCharacter[] playable_characters = { new PlayerCharacter(1), new PlayerCharacter(2) };
   

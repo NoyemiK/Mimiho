@@ -61,18 +61,25 @@ abstract class GameState {
 class TitleState extends GameState {
   public int selection_index;
   public String[] options = { "New Game", "Load Game", "Exit" };
+  public String[] debug_options = {
+    "Enable infinite ammunition (DEBUG)", "Enable infinite tokens (DEBUG)",
+    "Unlock all outfits (DEBUG)", "Convert Progression Tables (DEBUG)"
+  };
   private PImage title_card;
   
   TitleState() {
     selection_index = 0;
     title_card = loadImage("graphics/title_card.png");
+    if (debug_mode) {
+      options = concat(options, debug_options);
+    }
   }
   
   void update() {
     image(title_card, 0, 0);
-    for ( int i = 0; i < options.length; i++ ) {
+    for ( int i = 0; i < options.length ; i++ ) {
       if (i == selection_index) { fill( 0xCC, 0x33, 0x55 ); }
-      text(options[i], width/2 - 120, (height/2 - 48) + (i * 16));
+      text(options[i], width/2 - 120, (height/2 + 48) + (i * 16));
       fill( 0xFF, 0xFF, 0xFF );
     }
   }
@@ -92,19 +99,21 @@ class TitleState extends GameState {
   }
   
   void input_up() {
-    if (selection_index == 0) { selection_index = 2; }
+    if (selection_index == 0) { selection_index = options.length - 1; }
     else { selection_index--; }
   }
   
   void input_down() {
-    if (selection_index == 2) { selection_index = 0; }
+    if (selection_index == options.length - 1) { selection_index = 0; }
     else { selection_index++; }
   }
   
   void input_left() {}
   void input_right() {}
   void input_confirm() {
-    GameStates[] n = { GameStates.NEW_GAME, GameStates.FILE, GameStates.QUIT };
+    GameStates[] n = { 
+      GameStates.NEW_GAME, GameStates.FILE, GameStates.QUIT
+    };
     game.current_state = n[selection_index];
     game.new_game_screen.init();
   }
@@ -112,7 +121,7 @@ class TitleState extends GameState {
 }
 
 class NewGameState extends GameState {
-  public int selection_index;
+  public byte selection_index;
   public String[] options = { "Start Game as Amihailu", "Start Game as Kekolu",
     "Option: Pimiko Mode | Level up thru Lumpee's Magic Shop        | ",
     "Option: Mimi's Ward | Disable Hunter-type AI package           | ",
@@ -169,13 +178,13 @@ class NewGameState extends GameState {
   }
   
   void input_up() {
-    if (selection_index == 0) { selection_index = options.length - 1; }
+    if (selection_index == 0) { selection_index = byte(options.length - 1); }
     else { selection_index--; }
     char_toggle();
   }
   
   void input_down() {
-    if (selection_index == options.length - 1) { selection_index = 0; }
+    if (selection_index == (options.length - 1)) { selection_index = 0; }
     else { selection_index++; }
     char_toggle();
   }
