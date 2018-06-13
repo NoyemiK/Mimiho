@@ -1,56 +1,37 @@
-public enum GameStates{
-  TITLE,
-  NEW_GAME,
-  FILE,
-  MAIN,
-  SHOP,
-  QUIT
-}
 
 class Game {
   
-  GameStates current_state;
-  TitleState title_screen;
-  NewGameState new_game_screen;
+  ArrayList<GameState> gamestate_stack = new ArrayList<GameState>();
   Player player;
   
   Game () {
-    current_state = GameStates.TITLE;
     player = new Player();
-    title_screen = new TitleState();
-    new_game_screen = new NewGameState();
+    gamestate_stack.add(new TitleState());
   }
   
   void update() {
-    switch (current_state) {
-      case TITLE:
-        title_screen.update();
-        break;
-      case NEW_GAME:
-        new_game_screen.update();
-        break;
-      case QUIT:
-        exit();
-        break;
-    }
+    GameState current_state = gamestate_stack.get(gamestate_stack.size() - 1);
+    current_state.update();
   }
   
   void input(String signal) {
-    switch (current_state) {
-      case TITLE:
-        title_screen.input(signal);
-        break;
-      case NEW_GAME:
-        new_game_screen.input(signal);
-        break;
-    }
+    GameState current_state = gamestate_stack.get(gamestate_stack.size() - 1);
+    current_state.input(signal);
+  }
+  
+  void push_gamestate(GameState state) {
+    gamestate_stack.add(state);
+  }
+  
+  void pop_gamestate() {
+    gamestate_stack.remove(gamestate_stack.size() - 1);
   }
 }
 
-abstract class GameState {
+interface GameState {
   
-  abstract void update();
-  abstract void input(String signal);
+  void update();
+  void input(String signal);
   
 }
 
@@ -58,20 +39,16 @@ abstract class GameState {
 // STATE LOGIC
 //========================
 
-class TitleState extends GameState {
+class TitleState implements GameState {
   public int selection_index;
   public String[] options = { "New Game", "Load Game", "Exit" };
-  public String[] debug_options = {
-    "Enable infinite ammunition (DEBUG)", "Enable infinite tokens (DEBUG)",
-    "Unlock all outfits (DEBUG)", "Convert Progression Tables (DEBUG)"
-  };
   private PImage title_card;
   
   TitleState() {
     selection_index = 0;
     title_card = loadImage("graphics/title_card.png");
     if (debug_mode) {
-      options = concat(options, debug_options);
+      options = append(options, "\n\n--DEBUG MENU--");
     }
   }
   
@@ -111,16 +88,21 @@ class TitleState extends GameState {
   void input_left() {}
   void input_right() {}
   void input_confirm() {
-    GameStates[] n = { 
-      GameStates.NEW_GAME, GameStates.FILE, GameStates.QUIT
-    };
-    game.current_state = n[selection_index];
-    game.new_game_screen.init();
+    switch (selection_index) {
+      case 0:
+        game.push_gamestate(new NewGameState());
+        break;
+      case 1:
+        break;
+      case 2:
+        exit();
+        break;
+    }
   }
   
 }
 
-class NewGameState extends GameState {
+class NewGameState implements GameState {
   public byte selection_index;
   public String[] options = { "Start Game as Amihailu", "Start Game as Kekolu",
     "Option: Pimiko Mode | Level up thru Lumpee's Magic Shop        | ",
@@ -213,6 +195,6 @@ class NewGameState extends GameState {
     }
   }
   void input_cancel() { 
-    game.current_state = GameStates.TITLE;
+    game.pop_gamestate();
   }
 }

@@ -39,3 +39,7 @@ void convert_progression_table(String name) {
   saveTable(t, name + ".bun2", "bin");
   println("Converted " + name + ".csv to: " + name + ".bun2");
 }
+
+class DebugOptions {
+  
+}
