@@ -2,6 +2,8 @@ import ddf.minim.*;
 
 Game game;
 PFont regular_font;
+Minim minim;
+AudioPlayer music;
 boolean debug_mode;
 
 void setup() {
@@ -10,8 +12,11 @@ void setup() {
   frameRate(60);
   regular_font = loadFont("regular.vlw");
   textFont(regular_font);
-  game = new Game();
   
+  minim = new Minim(this);
+  music = minim.loadFile("music/GAME_1.mp3");
+  game = new Game();
+  music.loop();
 }
 
 void draw() {

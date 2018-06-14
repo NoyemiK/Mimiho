@@ -2,6 +2,8 @@
 
 A grand extension of the java port of *Pimiko* that features gamestates, items, creature variety, spells, and new weapons all wrapped up in a graphical interface with tile-based presentation instead of the original text-only.
 
+![alt text](http://i.imgur.com/rxcWSuT.png "Game Start")
+
 ## Features
 
 *As of the current commit, the code is still a work in progress. Many things are subject to change very quickly!*
@@ -13,6 +15,7 @@ A grand extension of the java port of *Pimiko* that features gamestates, items, 
 - Gamestate framework
 - PC-98 style display resolution of 640x400 and palette assigned from 12-bit colourspace (4bit r, g, and b)
 - 20x20 tile and spriteset size
+- mp3 music
 
 ### Gameplay
 
