@@ -40,6 +40,16 @@ void convert_progression_table(String name) {
   println("Converted " + name + ".csv to: " + name + ".bun2");
 }
 
-class DebugOptions {
+class DebugMenu implements GameState {
+  int selection_index = 0;
+  String[] options = {
+    "Set tokencount  to 999", "Generate a progression table", ""
+  };
+  
+  void update() {
+  }
+  
+  void input(String signal) {
+  }
   
 }

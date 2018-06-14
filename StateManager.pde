@@ -38,7 +38,6 @@ class Game {
 }
 
 interface GameState {
-  int selection_index = 0;
   
   void update();
   void input(String signal);
@@ -50,8 +49,8 @@ interface GameState {
 //========================
 
 class TitleState implements GameState {
-  public int selection_index;
-  public String[] options = { 
+   int selection_index;
+   String[] options = { 
     "New Game", "File Menu", "Exit" 
   };
   private PImage title_card;
@@ -112,14 +111,14 @@ class TitleState implements GameState {
 }
 
 class NewGameState implements GameState {
-  public byte selection_index;
-  public String[] options = { 
+  byte selection_index;
+  String[] options = { 
     "Start Game as Amihailu", "Start Game as Kekolu",
     "Option: Pimiko Mode | Level up thru Lumpee's Magic Shop        | ",
     "Option: Mimi's Ward | Disable Hunter-type AI package           | ",
     "Option: Magazines   | Weapons require reloading (1 Turn Point) | " 
   };
-  public char[] game_options = { 'N', 'N', 'N' };
+  char[] game_options = { 'N', 'N', 'N' };
   String char_info;
     
     NewGameState () {
@@ -197,20 +196,22 @@ class NewGameState implements GameState {
   void input_confirm() {
     
   }
+  
+  void input_cancel() { 
+    game.pop_gamestate();
+  }
+  
   void char_toggle() {
     if (selection_index < 2) {
       game.player.set_character(selection_index);
       game.player.playable_characters[game.player.character].get_info();
     }
   }
-  void input_cancel() { 
-    game.pop_gamestate();
-  }
 }
 
 class FileMenu implements GameState {
   int selection_index = 0;
-  public String[] options = {
+  String[] options = {
     "Load a saved game", "Delete a saved game", "Reset persistent data"
   };
   
@@ -219,11 +220,41 @@ class FileMenu implements GameState {
   }
   
   void update(){
-    
+    game.draw_options(options, selection_index, width/2 - 128, 128);
   }
   
-  void input(String signal){
-    game.pop_gamestate();
+  void input(String signal) {
+    switch(signal) {
+      case "UP":
+        input_up();
+        break;
+      case "DOWN":
+        input_down();
+        break;
+      case "CONFIRM":
+        input_confirm();
+        break;
+      case "CANCEL":
+        input_cancel();
+        break;
+    } 
   }
+  
+  void input_up() {
+    if (selection_index == 0) { selection_index = options.length - 1; }
+    else { selection_index--; }
+  }
+  
+  void input_down() {
+    if (selection_index == options.length - 1) { selection_index = 0; }
+    else { selection_index++; }
+  }
+  
+  void input_confirm() {
+    
+  }
+  void input_cancel() {
+      game.pop_gamestate();
+    }
   
 }

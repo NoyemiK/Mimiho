@@ -9,11 +9,11 @@ class Entity {
     this.speed = 1;
   }
   
-  public void kill() {
+   void kill() {
     this.alive = false;
   }
   
-  public void move() {
+   void move() {
      
   }
 }
@@ -30,7 +30,7 @@ class Player extends Entity {
     set_character(0);
   }
   
-  public void set_character(int selection) {
+   void set_character(int selection) {
     character = selection;
   }
   
@@ -60,14 +60,14 @@ class PlayerCharacter {
     char_info = new StringBuilder(character_name);
   }
   
-  public void get_info() {
+   void get_info() {
     char_info.setLength(character_name.length());
     char_info.append("\nOUTFIT: ");
     char_info.append(outfit_names[game.player.portrait]);
     char_info.append("\n OUTFIT PERK: []");
   }
   
-  public void draw_portrait(int x, int y) {
+   void draw_portrait(int x, int y) {
     image(portraits[game.player.portrait], x, y);
   }
   
