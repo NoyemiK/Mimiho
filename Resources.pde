@@ -19,3 +19,26 @@ class Perk {
   }
   
 }
+
+void load_persistent_data() {
+  byte[] p_data = loadBytes("data/extconf.bun2");
+  try {
+    println(p_data[0] + " " + p_data[1] + " " + p_data[2] + " " + p_data[3]);
+  }
+  catch (Exception e) {
+    println("Persistent data not found. Regenerating file...");
+    generate_persistent_data();
+  }
+}
+
+void generate_persistent_data() {
+  byte[] p_data = {
+    0x01,          // Version header
+    0x03, 0x03,    // Character outfit unlocks (Amihailu, Kekolu)
+    0x0F, 0x0F,    // Token Count, element 4 gets shifted 4 bits to the left and ORed with element 5 -- (p_data[3] << 4) | p_data[4]
+    0x01           // Dungeon Count. Represents unlocked gauntlets
+  };
+  
+  saveBytes("data/extconf.bun2", p_data);
+  load_persistent_data();
+}
