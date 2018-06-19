@@ -5,6 +5,7 @@ PFont regular_font;
 Minim minim;
 AudioPlayer music;
 boolean debug_mode;
+int VERSION_NUM = 0_01;
 
 void setup() {
   debug_mode = false;

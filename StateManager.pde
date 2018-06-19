@@ -212,7 +212,7 @@ class NewGameState implements GameState {
 class FileMenu implements GameState {
   int selection_index = 0;
   String[] options = {
-    "Load a saved game", "Delete a saved game", "Reset persistent data"
+    "Load a saved game", "Delete a saved game", "Reset persistent data", "Return to Title"
   };
   
   FileMenu () {
@@ -251,10 +251,22 @@ class FileMenu implements GameState {
   }
   
   void input_confirm() {
-    
+    switch(selection_index) {
+      case 0:
+        break;
+      case 1:
+        break;
+      case 2:
+        game.push_gamestate(new ConfirmDialog("FILE_PERSISTENT"));
+        break;
+      case 3:
+        game.pop_gamestate();
+        break;
+    }
   }
+  
   void input_cancel() {
       game.pop_gamestate();
-    }
+  }
   
 }

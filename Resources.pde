@@ -33,7 +33,7 @@ void load_persistent_data() {
 
 void generate_persistent_data() {
   byte[] p_data = {
-    0x01,          // Version header
+    (byte) VERSION_NUM,          // Version header
     0x03, 0x03,    // Character outfit unlocks (Amihailu, Kekolu)
     0x00,          // Token Count, element gets ANDed with 0xFF to create unsigned byte
     0,             // Dungeon Count. Represents unlocked gauntlets
