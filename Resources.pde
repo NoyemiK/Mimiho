@@ -35,8 +35,9 @@ void generate_persistent_data() {
   byte[] p_data = {
     0x01,          // Version header
     0x03, 0x03,    // Character outfit unlocks (Amihailu, Kekolu)
-    0x0F, 0x0F,    // Token Count, element 4 gets shifted 4 bits to the left and ORed with element 5 -- (p_data[3] << 4) | p_data[4]
-    0x01           // Dungeon Count. Represents unlocked gauntlets
+    0x00,          // Token Count, element gets ANDed with 0xFF to create unsigned byte
+    0,             // Dungeon Count. Represents unlocked gauntlets
+    0              // Achievements. More on those later
   };
   
   saveBytes("data/extconf.bun2", p_data);
