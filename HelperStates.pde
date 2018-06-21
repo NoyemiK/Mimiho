@@ -51,6 +51,7 @@ class ConfirmDialog implements GameState {
   void input_confirm() {
     switch (selection_index) {
        case 0:
+         perform_action();
          break;
        case 1:
          game.pop_gamestate();
@@ -60,5 +61,15 @@ class ConfirmDialog implements GameState {
   
   void input_cancel() {
       game.pop_gamestate();
+  }
+  
+  void perform_action() {
+    switch(type) {
+      case "FILE_PERSISTENT":
+        generate_persistent_data();
+        load_persistent_data(game);
+        game.pop_gamestate();
+        break;
+    }
   }
 }

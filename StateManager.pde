@@ -3,10 +3,12 @@ class Game {
   
   ArrayList<GameState> gamestate_stack = new ArrayList<GameState>();
   Player player;
+  short[] persistent_data = new short[6];
   
   Game () {
     player = new Player();
     gamestate_stack.add(new TitleState());
+    load_persistent_data(this);
   }
   
   void update() {
