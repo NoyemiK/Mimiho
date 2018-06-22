@@ -107,6 +107,9 @@ class TitleState implements GameState {
       case 2:
         exit();
         break;
+      case 3:
+        game.push_gamestate(new DebugMenu());
+        break;
     }
   }
   

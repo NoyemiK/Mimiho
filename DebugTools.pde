@@ -43,13 +43,55 @@ void convert_progression_table(String name) {
 class DebugMenu implements GameState {
   int selection_index = 0;
   String[] options = {
-    "Set tokencount  to 999", "Generate a progression table", ""
+    "Unlock all Outfits", "Unlock all Mapsets",
+    "Set tokencount to 255", "Generate a progression table"
   };
   
+  DebugMenu () {
+    
+  }
+  
   void update() {
+    game.draw_options(options, selection_index, width/2 - 96, 128);
   }
   
   void input(String signal) {
+    switch (signal) {
+      case "UP":
+        input_up();
+        break;
+      case "DOWN":
+        input_down();
+        break;
+      case "CONFIRM":
+        input_confirm();
+        break;
+      case "CANCEL":
+        input_cancel();
+        break;
+    }
   }
   
+  void input_up() {
+    if (selection_index == 0) { selection_index = options.length - 1; }
+    else { selection_index--; }
+  }
+  
+  void input_down() {
+    if (selection_index == options.length - 1) { selection_index = 0; }
+    else { selection_index++; }
+  }
+  
+  void input_confirm() {
+    switch (selection_index) {
+       case 0:
+         break;
+       case 1:
+         break;
+    }
+  }
+  
+  void input_cancel() {
+      game.pop_gamestate();
+  }
 }

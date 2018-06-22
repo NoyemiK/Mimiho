@@ -31,7 +31,7 @@ void load_persistent_data(Game game) {
     load_persistent_data(game);
   }
   
-  for ( int i = 0; i < 6; i++ ){
+  for ( int i = 0; i < 6; i++ ) {
     if (i == 3) {
       game.persistent_data[i] = (short) (p_data[i] & 0xFF);
       println("TOKEN COUNT IS " + game.persistent_data[i]);
