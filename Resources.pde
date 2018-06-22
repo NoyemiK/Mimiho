@@ -41,8 +41,13 @@ void load_persistent_data(Game game) {
   }
 }
 
-void save_persistent_data() {
+void save_persistent_data(Game game) {
+  byte[] p_data = new byte[6];
+  for ( int i = 0; i < 6; i++ ) {
+    p_data[i] = (byte) game.persistent_data[i];
+  }
   
+  saveBytes("data/extconf2.bun2", p_data);
 }
 
 void generate_persistent_data() {
