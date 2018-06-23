@@ -32,12 +32,7 @@ void load_persistent_data(Game game) {
   }
   
   for ( int i = 0; i < 6; i++ ) {
-    if (i == 3) {
-      game.persistent_data[i] = (short) (p_data[i] & 0xFF);
-      println("TOKEN COUNT IS " + game.persistent_data[i]);
-    } else {
-      game.persistent_data[i] = p_data[i];
-    }
+    game.persistent_data[i] = (short) (p_data[i] & 0xFF);
   }
 }
 
