@@ -299,7 +299,7 @@ class PlayField implements GameState {
     field_width = fw;
     field_height = fh;
     Resources.load_mapset(1);
-    map_tiles = Resources.get_map(0, 30, 30);
+    map_tiles = Resources.get_map(0, fw, fh);
     camera = new Camera(0, 0, 30);
     update_stat_buffer();
     update_tilemap_buffer();
