@@ -37,7 +37,7 @@ class GameResources {
       for (int w = 0; w < mw; w++) {
         int x = index % 2;
         int y = index / 2;
-        int transformed = ((w + (x * 30)) + (mw * 2) * (h + (y * 30))); //Has to account for the fact that the array is two-columns
+        int transformed = ((w + (x * mw)) + (mw * 2) * (h + (y * mw))); //Has to account for the fact that the array is two-columns
         tiles[w][h] = (mapset_tiles.getInt(transformed) - 1);
       }
     }

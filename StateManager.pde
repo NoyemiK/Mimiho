@@ -284,6 +284,7 @@ class FileMenu implements GameState {
 }
 
 class PlayField implements GameState {
+  Camera camera;
   PGraphics stat_buffer = createGraphics(188, 340);
   PGraphics tilemap_buffer = createGraphics(340, 340);
   PImage frame;
@@ -299,15 +300,18 @@ class PlayField implements GameState {
     field_height = fh;
     Resources.load_mapset(1);
     map_tiles = Resources.get_map(0, 30, 30);
+    camera = new Camera(0, 0, 30);
     update_stat_buffer();
     update_tilemap_buffer();
   }
   
   void update() {
+    int player_screen_x = frame_corner_x + ((game.player.x * 20) - (camera.x * 20));
+    int player_screen_y = frame_corner_y + ((game.player.y * 20) - (camera.y * 20));
     image(frame, 0, 0);
     image(tilemap_buffer, frame_corner_x, frame_corner_y);
     image(stat_buffer, 421, 30);
-    image(Resources.spriteset[game.player.sprite], frame_corner_x + (game.player.x * 20), frame_corner_y + (game.player.y * 20));
+    image(Resources.spriteset[game.player.sprite], player_screen_x, player_screen_y);
   }
   
   void update_stat_buffer() {
@@ -324,10 +328,27 @@ class PlayField implements GameState {
     tilemap_buffer.beginDraw();
     for (int h = 0; h < 17; h++) {
       for (int w = 0; w < 17; w++) {
-        tilemap_buffer.image(Resources.tileset[map_tiles[w][h]], (w * 20), (h * 20));
+        tilemap_buffer.image(Resources.tileset[map_tiles[w + camera.x][h + camera.y]], (w * 20), (h * 20));
       }
     }
     tilemap_buffer.endDraw();
+  }
+  
+  void update_game_camera() {
+    if (game.player.x > (camera.x + 8)) {
+      camera.translate(1, 0);
+      update_tilemap_buffer();
+    } else if (game.player.x < (camera.x + 8)) {
+      camera.translate(-1, 0);
+      update_tilemap_buffer();
+    }
+    if (game.player.y > (camera.y + 8)) {
+      camera.translate(0, 1);
+      update_tilemap_buffer();
+    } else if (game.player.y < (camera.y + 8)) {
+      camera.translate(0, -1);
+      update_tilemap_buffer();
+    }
   }
   
   void input(String signal) {
@@ -351,6 +372,7 @@ class PlayField implements GameState {
         input_cancel();
         break;
     }
+    update_game_camera();
   }
   
   void input_up() {

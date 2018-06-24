@@ -103,3 +103,26 @@ class PlayerCharacter {
     }
   }
 }
+
+class Camera {
+  int x;
+  int y;
+  int max_x;
+  int max_y;
+  
+  Camera (int init_x, int init_y, int mapsquare) {
+    this.x = init_x;
+    this.y = init_y;
+    this.max_x = mapsquare - 17;
+    this.max_y = mapsquare - 17;
+  }
+  
+  void translate(int tx, int ty) {
+    if ((x + tx < 0) || (x + tx > max_x))
+      tx = 0;
+    if ((y + ty < 0) || (y + ty > max_y))
+      ty = 0;
+    this.x += tx;
+    this.y += ty;
+  }
+}
