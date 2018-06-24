@@ -2,6 +2,8 @@ class Entity {
   short hit_points, armour_points, strength, speed;
   short max_hit_points, max_armour_points;
   IntDict skill_table;
+  int x;
+  int y;
   boolean alive;
   
   Entity() {
@@ -9,29 +11,33 @@ class Entity {
     this.speed = 1;
   }
   
-   void kill() {
+  void kill() {
     this.alive = false;
   }
   
-   void move() {
-     
+  void move(int xmov, int ymov) {
+    this.x = this.x + xmov;
+    this.y = this.y + ymov;
   }
 }
 
 class Player extends Entity {
   byte portrait;
   int character;
+  int sprite;
   PlayerCharacter[] playable_characters = { new PlayerCharacter(1), new PlayerCharacter(2) };
   
   Player() {
     
-    //Setup the portrait graphics
+    x = 1;
+    y = 1;
     portrait = 0;
     set_character(0);
   }
   
    void set_character(int selection) {
     character = selection;
+    sprite = selection;
   }
   
 }

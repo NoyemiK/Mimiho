@@ -1,6 +1,7 @@
 import ddf.minim.*;
 
 Game game;
+GameResources Resources;
 PFont regular_font;
 Minim minim;
 AudioPlayer music;
@@ -17,6 +18,8 @@ void setup() {
   minim = new Minim(this);
   music = minim.loadFile("music/GAME_1.mp3");
   game = new Game();
+  Resources = new GameResources();
+
   music.loop();
 }
 

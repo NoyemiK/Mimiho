@@ -150,27 +150,27 @@ class NewGameState implements GameState {
     }
     
     void input(String signal) {
-    switch (signal) {
-      case "UP":
-        input_up();
-        break;
-      case "DOWN":
-        input_down();
-        break;
-      case "LEFT":
-        input_left();
-        break;
-      case "RIGHT":
-        input_right();
-        break;
-      case "CONFIRM":
-        input_confirm();
-        break;
-      case "CANCEL":
-        input_cancel();
-        break;
+      switch (signal) {
+        case "UP":
+          input_up();
+          break;
+        case "DOWN":
+          input_down();
+          break;
+        case "LEFT":
+          input_left();
+          break;
+        case "RIGHT":
+          input_right();
+          break;
+        case "CONFIRM":
+          input_confirm();
+          break;
+        case "CANCEL":
+          input_cancel();
+          break;
+      }
     }
-  }
   
   void input_up() {
     if (selection_index == 0) { selection_index = byte(options.length - 1); }
@@ -199,7 +199,14 @@ class NewGameState implements GameState {
     char_toggle();
   }
   void input_confirm() {
-    
+    switch (selection_index) {
+      case 0:
+        game.push_gamestate(new PlayField(30, 30));
+        break;
+      case 1:
+        game.push_gamestate(new PlayField(30, 30));
+        break;
+    }
   }
   
   void input_cancel() { 
@@ -274,4 +281,93 @@ class FileMenu implements GameState {
       game.pop_gamestate();
   }
   
+}
+
+class PlayField implements GameState {
+  PGraphics stat_buffer = createGraphics(188, 340);
+  PGraphics tilemap_buffer = createGraphics(340, 340);
+  PImage frame;
+  int field_width;
+  int field_height;
+  int frame_corner_x = 30;
+  int frame_corner_y = 30;
+  int[][] map_tiles;
+  
+  PlayField (int fw, int fh) {
+    frame = loadImage("data/graphics/frame.png");
+    field_width = fw;
+    field_height = fh;
+    Resources.load_mapset(1);
+    map_tiles = Resources.get_map(0, 30, 30);
+    update_stat_buffer();
+    update_tilemap_buffer();
+  }
+  
+  void update() {
+    image(frame, 0, 0);
+    image(tilemap_buffer, frame_corner_x, frame_corner_y);
+    image(stat_buffer, 421, 30);
+    image(Resources.spriteset[game.player.sprite], frame_corner_x + (game.player.x * 20), frame_corner_y + (game.player.y * 20));
+  }
+  
+  void update_stat_buffer() {
+    stat_buffer.beginDraw();
+    stat_buffer.textFont(regular_font);
+    stat_buffer.image(game.player.playable_characters[game.player.character].portraits[game.player.portrait], 0, 0);
+    stat_buffer.fill( 0xFF, 0x99, 0x99 );
+    stat_buffer.text("HEALTH:\n         " + game.player.hit_points + "/" + game.player.max_hit_points, 48, 12);
+    stat_buffer.text("ARMOUR:\n         " + game.player.armour_points + "/" + game.player.max_armour_points, 48, 48);
+    stat_buffer.endDraw();
+  }
+  
+  void update_tilemap_buffer() {
+    tilemap_buffer.beginDraw();
+    for (int h = 0; h < 17; h++) {
+      for (int w = 0; w < 17; w++) {
+        tilemap_buffer.image(Resources.tileset[map_tiles[w][h]], (w * 20), (h * 20));
+      }
+    }
+    tilemap_buffer.endDraw();
+  }
+  
+  void input(String signal) {
+    switch (signal) {
+      case "UP":
+        input_up();
+        break;
+      case "DOWN":
+        input_down();
+        break;
+      case "LEFT":
+        input_left();
+        break;
+      case "RIGHT":
+        input_right();
+        break;
+      case "CONFIRM":
+        //input_confirm();
+        break;
+      case "CANCEL":
+        input_cancel();
+        break;
+    }
+  }
+  
+  void input_up() {
+    game.player.move(0, -1);
+  }
+  
+  void input_down() {
+    game.player.move(0, 1);
+  }
+  void input_left() {
+    game.player.move(-1, 0);
+  }
+  
+  void input_right() {
+    game.player.move(1, 0);
+  }
+  void input_cancel() {
+    game.pop_gamestate();
+  }
 }

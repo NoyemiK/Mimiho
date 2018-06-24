@@ -22,12 +22,12 @@ A grand extension of the java port of *Pimiko* that features gamestates, items, 
 - Choice of two player characters, Amihailu and Kekolu
 - Persistent data and savegames (a feature from the original *Pimiko* that did not make it into the Processing port)
 - Melee and Ranged weaponry
+- Keyboard-based controls: *Arrow keys for movement, `A` for a melee attack, `S` for a ranged attack (if available), `Z` to confirm or perform an action, `X` to cancel or bring up the in-game menu*
 
 `This section is a stub. As features are completed, this section will be updated.`
 
 ### TODO
 
-- Keyboard-based controls: *Arrow keys for movement, `A` for a melee attack, `S` for a ranged attack (if available), `Z` to confirm or perform an action, `X` to cancel or bring up the in-game menu*
 - Stat and skill tables for simple player character progression
 - Opposition! A full set of basic enemies with different patterns (and stronger variants for later dungeons)
 - Maploader and map assembly functions (mostly handmade with procedural combinations)
