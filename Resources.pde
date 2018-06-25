@@ -1,5 +1,48 @@
 class GameResources {
+  JSONObject mapset;
+  int num_maps;
+  PImage tileset_img;
+  PImage spriteset_img;
+  PImage[] tileset = new PImage[32];
+  PImage[] spriteset = new PImage[32];
   
+  GameResources () {
+    tileset_img = loadImage("data/graphics/tileset.png");
+    spriteset_img = loadImage("data/graphics/spriteset.png");
+    
+    for (int h = 0; h < 4; h++) {
+      for (int w = 0; w < 8; w++) {
+        spriteset[(8*h) + w] = spriteset_img.get(w * 20, h * 20, 20, 20);
+        tileset[(8*h) + w] = tileset_img.get(w * 20, h * 20, 20, 20);
+      }
+    }
+  }
+  
+  void load_mapset(int which) {
+    mapset = loadJSONObject("data/mapsets/mapset_" + which + ".json");
+    switch (which) {
+      case 1:
+        num_maps = 10;
+        break;
+    }
+  }
+  
+  int[][] get_map(int index, int mw, int mh) {
+    JSONArray layers = mapset.getJSONArray("layers");
+    JSONObject mapset_data = layers.getJSONObject(0);
+    JSONArray mapset_tiles = mapset_data.getJSONArray("data");
+    int[][] tiles = new int[mw][mh];
+    
+    for (int h = 0; h < mh; h++) {
+      for (int w = 0; w < mw; w++) {
+        int x = index % 2;
+        int y = index / 2;
+        int transformed = ((w + (x * mw)) + (mw * 2) * (h + (y * mw))); //Has to account for the fact that the array is two-columns
+        tiles[w][h] = (mapset_tiles.getInt(transformed) - 1);
+      }
+    }
+    return tiles;
+  }
 }
 
 class Perk {
@@ -21,6 +64,7 @@ class Perk {
 }
 
 void load_persistent_data(Game game) {
+  // Generate persistent data if it's not in the directory
   byte[] p_data = loadBytes("data/extconf.bun2");
   try {
     println(p_data[0] + " " + p_data[1] + " " + p_data[2] + " " + p_data[3]);
@@ -29,9 +73,10 @@ void load_persistent_data(Game game) {
     println("Persistent data not found. Regenerating file...");
     generate_persistent_data();
     load_persistent_data(game);
+    return;
   }
   
-  for ( int i = 0; i < 6; i++ ) {
+  for ( int i = 0; i < p_data.length; i++ ) {
     game.persistent_data[i] = (short) (p_data[i] & 0xFF);
   }
 }

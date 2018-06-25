@@ -2,6 +2,8 @@ class Entity {
   short hit_points, armour_points, strength, speed;
   short max_hit_points, max_armour_points;
   IntDict skill_table;
+  int x;
+  int y;
   boolean alive;
   
   Entity() {
@@ -9,29 +11,33 @@ class Entity {
     this.speed = 1;
   }
   
-   void kill() {
+  void kill() {
     this.alive = false;
   }
   
-   void move() {
-     
+  void move(int xmov, int ymov) {
+    this.x = this.x + xmov;
+    this.y = this.y + ymov;
   }
 }
 
 class Player extends Entity {
   byte portrait;
   int character;
+  int sprite;
   PlayerCharacter[] playable_characters = { new PlayerCharacter(1), new PlayerCharacter(2) };
   
   Player() {
     
-    //Setup the portrait graphics
+    x = 1;
+    y = 1;
     portrait = 0;
     set_character(0);
   }
   
    void set_character(int selection) {
     character = selection;
+    sprite = selection;
   }
   
 }
@@ -95,5 +101,28 @@ class PlayerCharacter {
       outfit_names[i] = names[i];
       portraits[i] = portrait_strip.get(i * 48, 0, 48, 128);
     }
+  }
+}
+
+class Camera {
+  int x;
+  int y;
+  int max_x;
+  int max_y;
+  
+  Camera (int init_x, int init_y, int mapsquare) {
+    this.x = init_x;
+    this.y = init_y;
+    this.max_x = mapsquare - 17;
+    this.max_y = mapsquare - 17;
+  }
+  
+  void translate(int tx, int ty) {
+    if ((x + tx < 0) || (x + tx > max_x))
+      tx = 0;
+    if ((y + ty < 0) || (y + ty > max_y))
+      ty = 0;
+    this.x += tx;
+    this.y += ty;
   }
 }
