@@ -297,12 +297,14 @@ class PlayField implements GameState {
   
   PlayField (int fw, int fh) {
     frame = loadImage("data/graphics/frame.png");
+    game.player.init_pos();
     field_width = fw;
     field_height = fh;
     Resources.load_mapset(1);
     map_tiles = Resources.get_map(0, fw, fh);
     passabilities = Resources.setup_passability( map_tiles, fw, fh);
     camera = new Camera(0, 0, 30);
+    init_game_camera();
     update_stat_buffer();
     update_tilemap_buffer();
   }
@@ -334,6 +336,11 @@ class PlayField implements GameState {
       }
     }
     tilemap_buffer.endDraw();
+  }
+  
+  void init_game_camera() {
+    for (int i = 0; i < 16; i++)
+      update_game_camera();
   }
   
   void update_game_camera() {

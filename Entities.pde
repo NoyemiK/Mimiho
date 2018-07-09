@@ -40,6 +40,11 @@ class Player extends Entity {
     sprite = selection;
   }
   
+  void init_pos() {
+    this.x = 0;
+    this.y = 0;
+  }
+  
 }
 
 
