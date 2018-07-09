@@ -385,18 +385,18 @@ class PlayField implements GameState {
   }
   
   void input_up() {
-    game.player.move(0, -1);
+    game.player.move(0, -1, passabilities[game.player.x][game.player.y - 1]);
   }
   
   void input_down() {
-    game.player.move(0, 1);
+    game.player.move(0, 1, passabilities[game.player.x][game.player.y + 1]);
   }
   void input_left() {
-    game.player.move(-1, 0);
+    game.player.move(-1, 0, passabilities[game.player.x - 1][game.player.y]);
   }
   
   void input_right() {
-    game.player.move(1, 0);
+    game.player.move(1, 0, passabilities[game.player.x + 1][game.player.y]);
   }
   void input_cancel() {
     game.pop_gamestate();

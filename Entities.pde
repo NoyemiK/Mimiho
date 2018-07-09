@@ -15,9 +15,11 @@ class Entity {
     this.alive = false;
   }
   
-  void move(int xmov, int ymov) {
-    this.x = this.x + xmov;
-    this.y = this.y + ymov;
+  void move(int xmov, int ymov, boolean passable) {
+    if (passable) {
+      this.x = this.x + xmov;
+      this.y = this.y + ymov;
+    }
   }
 }
 

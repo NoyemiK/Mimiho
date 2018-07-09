@@ -40,7 +40,7 @@ class GameResources {
         int transformed = ((w + (x * mw)) + (mw * 2) * (h + (y * mw))); //Has to account for the fact that the array is two-columns
         tiles[w][h] = (mapset_tiles.getInt(transformed) - 1);
         if (tiles[w][h] == 31 || tiles[w][h] == 29) {                   //This is a dirty hack, plain and simple
-          game.player.move(w, h);
+          game.player.move(w, h, true);
         }
       }
     }
