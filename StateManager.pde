@@ -293,6 +293,7 @@ class PlayField implements GameState {
   int frame_corner_x = 30;
   int frame_corner_y = 30;
   int[][] map_tiles;
+  boolean[][] passabilities;
   
   PlayField (int fw, int fh) {
     frame = loadImage("data/graphics/frame.png");
@@ -300,6 +301,7 @@ class PlayField implements GameState {
     field_height = fh;
     Resources.load_mapset(1);
     map_tiles = Resources.get_map(0, fw, fh);
+    passabilities = Resources.setup_passability( map_tiles, fw, fh);
     camera = new Camera(0, 0, 30);
     update_stat_buffer();
     update_tilemap_buffer();

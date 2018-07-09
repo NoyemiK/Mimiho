@@ -43,6 +43,23 @@ class GameResources {
     }
     return tiles;
   }
+  
+  boolean[][] setup_passability(int[][] map, int mw, int mh) {
+    boolean[][] pass_map = new boolean[mw][mh]; //The passability matrix maps cleanly to the graphical map.
+    boolean[] passkey = {                       //The key tells which tiles are passable.
+      false, false, false, false, false, false, false, false,
+      true, true, true, true, true, true, true, true,
+      false, false, false, false, false, false, false, false,
+      false, false, true, true, true, true, true, true
+    };
+    
+    for (int h = 0; h < mh; h++) {
+      for (int w = 0; w < mw; w++) {
+        pass_map[w][h] = passkey[map[w][h]];
+      }
+    }
+    return pass_map;
+  }
 }
 
 class Perk {
