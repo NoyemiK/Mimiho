@@ -125,8 +125,10 @@ class NewGameState implements GameState {
   };
   char[] game_options = { 'N', 'N', 'N' };
   String char_info;
+  private PImage bg_card;
     
     NewGameState () {
+      bg_card = loadImage("graphics/title_gameselect.png");
       selection_index = 0;
     }
     
@@ -139,6 +141,7 @@ class NewGameState implements GameState {
     }
     
     void update() {
+      image(bg_card, 0, 0);
       game.draw_options(options, selection_index, 12, 32);
       for ( int i = 2; i < options.length; i++ ) {
         if (i == selection_index) { fill( 0xCC, 0x33, 0x55 ); }
@@ -319,12 +322,17 @@ class PlayField implements GameState {
   }
   
   void update_stat_buffer() {
+    String name = game.player.playable_characters[game.player.character].character_name;
     stat_buffer.beginDraw();
     stat_buffer.textFont(regular_font);
     stat_buffer.image(game.player.playable_characters[game.player.character].portraits[game.player.portrait], 0, 0);
     stat_buffer.fill( 0xFF, 0x99, 0x99 );
-    stat_buffer.text("HEALTH:\n         " + game.player.hit_points + "/" + game.player.max_hit_points, 48, 12);
-    stat_buffer.text("ARMOUR:\n         " + game.player.armour_points + "/" + game.player.max_armour_points, 48, 48);
+    
+    // For whatever reason, if I don't have a newline for this next line in particular,
+    // the text renders some characters vertically stretched—very bizarre!
+    stat_buffer.text("\n" + name, 48, 0);
+    stat_buffer.text("HEALTH:\n         " + game.player.hit_points + "/" + game.player.max_hit_points, 48, 32);
+    stat_buffer.text("ARMOUR:\n         " + game.player.armour_points + "/" + game.player.max_armour_points, 48, 64);
     stat_buffer.endDraw();
   }
   
