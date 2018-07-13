@@ -3,6 +3,7 @@ class ConfirmDialog implements GameState {
   String[] options = { "Yes", "No!" };
   String type;
   String message;
+  PImage bg_card = loadImage("graphics/title_fileselect.png");
   
   ConfirmDialog ( String t ) {
     type = t;
@@ -17,6 +18,7 @@ class ConfirmDialog implements GameState {
   }
   
   void update() {
+    image(bg_card, 0, 0);
     text(message, width/2 - 128, 100);
     game.draw_options(options, selection_index, width/2 - 64, 128);
   }

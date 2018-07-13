@@ -229,12 +229,14 @@ class FileMenu implements GameState {
   String[] options = {
     "Load a saved game", "Delete a saved game", "Reset persistent data", "Return to Title"
   };
+  PImage bg_card;
   
   FileMenu () {
-    
+    bg_card = loadImage("graphics/title_fileselect.png");
   }
   
   void update(){
+    image(bg_card, 0, 0);
     game.draw_options(options, selection_index, width/2 - 128, 128);
   }
   
