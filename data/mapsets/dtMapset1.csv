@@ -3,12 +3,25 @@ ID,SPEAKER,TEXT,memo
 1,Lumpee,"It's me, the great Lumpini!", - 
 2,Lumpee,Thank you for the doughnut money!, - 
 3,Lumpee,"Your wallet is even tinier than me!
-No upgrades for you!", - 
+No upgrades for you!",Original Pimiko dialogue
 4,Lumpee,"Fine, then!
  You don't get to have any of my tumy magic.", - 
 5,Lumpee,One amazing gun coming right up!, - 
 6,Lumpee,"A stupid witch turned me into a cereal ring!
-Can you believe that?", - 
+Can you believe that?",Backstory for the shop fairy
 7,Lumpee,But now I'm back to being a normal and tiny fairy., - 
 8,Lumpee,"Umm yeah we all must poke, duh.", - 
 9,Lumpee,Did you go to school dumb or are you just born like that., - 
+10,Kekolu,Sugar Bunny observed monster type 'hunter' on current floor.,Hunter-type monster spotted
+11,Kekolu,"Sugar Bunny noted current floor has colloquial:
+'palpable financial benefit'!",1.5x Token modifier for this floor
+12,Kekolu,Sugar Bunny expressed grogginess of her...,Kekolu is sleepy (random dialogue)
+13,Kekolu,"Expressed requirement of colloquial:
+'finger-lickin' good vittles' by Sugar Bunny.","Kekolu is hungry for tasty
+Southern cookin' (random dialogue)"
+14,Kekolu,Ahe... tummy of Sugar Bunny expresses protest of hunger of her.,Kekolu is hungry (random dialogue)
+15,Kekolu,,
+16,Kekolu,,
+17,Kekolu,,
+18,Kekolu,,
+19,Kekolu,,
