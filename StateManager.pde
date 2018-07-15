@@ -3,7 +3,7 @@ class Game {
   
   ArrayList<GameState> gamestate_stack = new ArrayList<GameState>();
   Player player;
-  short[] persistent_data = new short[6];
+  short[] persistent_data = new short[7];
   
   Game () {
     player = new Player();

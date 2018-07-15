@@ -19,7 +19,7 @@ void setup() {
   music = minim.loadFile("music/GAME_1.mp3");
   game = new Game();
   Resources = new GameResources();
-
+  
   music.loop();
 }
 

@@ -99,10 +99,13 @@ void load_persistent_data(Game game) {
   for ( int i = 0; i < p_data.length; i++ ) {
     game.persistent_data[i] = (short) (p_data[i] & 0xFF);
   }
+  
+  if (p_data[6] > 10){ music.mute(); }
+  else { music.setGain((float) p_data[6] * -1); }
 }
 
 void save_persistent_data(Game game) {
-  byte[] p_data = new byte[6];
+  byte[] p_data = new byte[7];
   for ( int i = 0; i < 6; i++ ) {
     p_data[i] = (byte) game.persistent_data[i];
   }
@@ -116,7 +119,8 @@ void generate_persistent_data() {
     0x03, 0x03,              // Character outfit unlocks (Amihailu, Kekolu)
     0x00,                    // Token Count, element gets ANDed with 0xFF to create unsigned byte
     0x00,                    // Dungeon Count. Represents unlocked gauntlets
-    0x00                     // Achievements. More on those later
+    0x00,                    // Achievements
+    0x00                     // Music Volume
   };
   
   saveBytes("data/extconf.bun2", p_data);
