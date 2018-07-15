@@ -37,6 +37,32 @@ class Game {
       fill( 0xFF, 0xFF, 0xFF );
     }
   }
+  
+  void draw_volume(int x, int y) {
+    
+    text("VOLUME: " + (10 - persistent_data[6]) + "\nALT: -\nCTRL: +", x, y);
+  }
+  
+  void volume_up() {
+    if (persistent_data[6] == 0) { return; }
+    persistent_data[6] -= 1;
+    set_volume();
+  }
+  
+  void volume_down() {
+    if (persistent_data[6] >= 11) { return; }
+    persistent_data[6] += 1;
+    set_volume();
+  }
+  
+  void set_volume() {
+    if (persistent_data[6] > 10){ music.mute(); }
+    else { 
+      music.setGain((float) persistent_data[6] * -1);
+      music.unmute();
+    }
+    save_persistent_data(this);
+  }
 }
 
 interface GameState {
@@ -68,6 +94,7 @@ class TitleState implements GameState {
   void update() {
     image(title_card, 0, 0);
     game.draw_options(options, selection_index, (width/2) - 120, (height/2) + 48);
+    game.draw_volume(2, 360);
   }
   
   void input(String signal) {

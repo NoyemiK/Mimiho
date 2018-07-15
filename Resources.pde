@@ -100,17 +100,16 @@ void load_persistent_data(Game game) {
     game.persistent_data[i] = (short) (p_data[i] & 0xFF);
   }
   
-  if (p_data[6] > 10){ music.mute(); }
-  else { music.setGain((float) p_data[6] * -1); }
+  game.set_volume();
 }
 
 void save_persistent_data(Game game) {
   byte[] p_data = new byte[7];
-  for ( int i = 0; i < 6; i++ ) {
+  for ( int i = 0; i < 7; i++ ) {
     p_data[i] = (byte) game.persistent_data[i];
   }
   
-  saveBytes("data/extconf2.bun2", p_data);
+  saveBytes("data/extconf.bun2", p_data);
 }
 
 void generate_persistent_data() {

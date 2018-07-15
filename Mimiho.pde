@@ -1,4 +1,5 @@
 import ddf.minim.*;
+import com.jogamp.newt.event.KeyEvent;
 
 Game game;
 GameResources Resources;
@@ -44,5 +45,7 @@ void keyPressed() {
     if (keyCode == DOWN) { game.input("DOWN"); }
     if (keyCode == LEFT) { game.input("LEFT"); }
     if (keyCode == RIGHT) { game.input("RIGHT"); }
+    if (keyCode == ALT) { game.volume_down(); }
+    if (keyCode == CONTROL) { game.volume_up(); }
   }
 }
