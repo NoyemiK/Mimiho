@@ -24,6 +24,26 @@ void gen_progression_table() {
   saveTable(t, "data/base_progression.csv", "csv");
 }
 
+void gen_dialogue_table() {
+  Table t = new Table();
+  String[] columns = {
+    "SPEAKER", "TEXT", "memo"
+  };
+  t.addColumn("ID", Table.INT);
+  for ( int i = 0; i < columns.length; i++ ) {
+    t.addColumn(columns[i], Table.STRING);
+  }
+  TableRow[] rows = new TableRow[10];
+  for ( int i = 0; i < rows.length; i++ ) {
+    rows[i] = t.addRow();
+    rows[i].setInt("ID", i);
+    rows[i].setString("SPEAKER", "Lumpee");
+    rows[i].setString("TEXT", "This is a test string!\n Replace with your own!");
+    rows[i].setString("memo", " - ");
+  }
+  saveTable(t, "data/dialogue_table.csv", "csv");
+}
+
 void convert_progression_table(String name) {
   Table t = loadTable(name + ".csv", "header, csv");
   int i = 1;
@@ -44,7 +64,7 @@ class DebugMenu implements GameState {
   int selection_index = 0;
   String[] options = {
     "Unlock all Outfits", "Unlock all Mapsets",
-    "Set tokencount to 255", "Generate a progression table"
+    "Set tokencount to 255", "Generate a progression table", "Generate a dialogue table"
   };
   
   DebugMenu () {
@@ -87,6 +107,13 @@ class DebugMenu implements GameState {
        case 0:
          break;
        case 1:
+         break;
+       case 2:
+         break;
+       case 3:
+         break;
+       case 4:
+         gen_dialogue_table();
          break;
     }
   }
