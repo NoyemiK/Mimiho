@@ -27,6 +27,9 @@ class Player extends Entity {
   byte portrait;
   int character;
   int sprite;
+  int level;
+  int exp;
+  Table progression_table;
   PlayerCharacter[] playable_characters = { new PlayerCharacter(1), new PlayerCharacter(2) };
   
   Player() {
@@ -35,6 +38,12 @@ class Player extends Entity {
     y = 1;
     portrait = 0;
     set_character(0);
+    this.max_hit_points    = 16;
+    this.max_armour_points = 8;
+    this.strength          = 5;
+    this.level             = 1;
+    this.exp               = 0;
+    progression_table = loadTable("base_progression.bun2", "header, bin");
   }
   
    void set_character(int selection) {
@@ -45,6 +54,21 @@ class Player extends Entity {
   void init_pos() {
     this.x = 0;
     this.y = 0;
+  }
+  
+  void init_stats() {
+    this.hit_points    = this.max_hit_points;
+    this.armour_points = this.max_armour_points;
+  }
+  
+  void level_up() {
+    this.level++;
+    TableRow row = progression_table.getRow(level);
+    this.max_hit_points    = (short) row.getInt("MHP");
+    this.max_armour_points = (short) row.getInt("MAP");
+    this.strength          = (short) row.getInt("STR");
+    this.speed             = (short) row.getInt("SPD");
+    this.exp -= row.getInt("EXP");
   }
   
 }

@@ -330,6 +330,7 @@ class PlayField implements GameState {
   PlayField (int fw, int fh) {
     frame = loadImage("data/graphics/frame.png");
     game.player.init_pos();
+    game.player.init_stats();
     field_width = fw;
     field_height = fh;
     Resources.load_mapset(1);
@@ -362,6 +363,8 @@ class PlayField implements GameState {
     stat_buffer.text("\n" + name, 48, 0);
     stat_buffer.text("HEALTH:\n         " + game.player.hit_points + "/" + game.player.max_hit_points, 48, 32);
     stat_buffer.text("ARMOUR:\n         " + game.player.armour_points + "/" + game.player.max_armour_points, 48, 64);
+    stat_buffer.text("ATTACK RATING:\nDir: " + game.player.strength + "/Rng: 0", 48, 96);
+    stat_buffer.text("\nMOVES PER TURN:\n         " + game.player.speed, 8, 128);
     stat_buffer.endDraw();
   }
   
