@@ -40,7 +40,8 @@ class GameResources {
         int transformed = ((w + (x * mw)) + (mw * 2) * (h + (y * mw))); //Has to account for the fact that the array is two-columns
         tiles[w][h] = (mapset_tiles.getInt(transformed) - 1);
         if (tiles[w][h] == 31 || tiles[w][h] == 29) {                   //This is a dirty hack, plain and simple
-          game.player.move(w, h, true);
+          game.player.x = w;
+          game.player.y = h;
         }
       }
     }
@@ -62,6 +63,22 @@ class GameResources {
       }
     }
     return pass_map;
+  }
+  
+  void change_music(int dir, int curr_map) {
+    //Changes music based on which map you're now on and which direction you came from
+    if (dir == 1 && curr_map == 3) {
+      music.close();
+      music = minim.loadFile("music/GAME_2.mp3");
+      game.set_volume();
+      music.loop();
+    }
+    else if (dir == -1 && curr_map == 2) {
+      music.close();
+      music = minim.loadFile("music/GAME_1.mp3");
+      game.set_volume();
+      music.loop();
+    }
   }
 }
 

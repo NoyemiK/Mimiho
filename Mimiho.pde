@@ -37,8 +37,8 @@ void draw() {
 void keyPressed() {
   if (key == 'z') { game.input("CONFIRM"); }
   if (key == 'x') { game.input("CANCEL"); }
-  if (key == 'a') { game.input("MELEE"); }
-  if (key == 'a') { game.input("GUN"); }
+  if (key == 'a') { game.input("SKILL"); }
+  if (key == 's') { game.input("GUN"); }
   if (key == ESC) { key = 0; game.input("CANCEL");}
   else if (key == CODED) {
     if (keyCode == UP) { game.input("UP"); }

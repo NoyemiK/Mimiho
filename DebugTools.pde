@@ -111,6 +111,7 @@ class DebugMenu implements GameState {
        case 2:
          break;
        case 3:
+         gen_progression_table();
          break;
        case 4:
          gen_dialogue_table();
