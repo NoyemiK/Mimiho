@@ -125,8 +125,8 @@ class PlayerCharacter {
     character_name = "Kekolu Chuudai";
     portrait_strip = loadImage("graphics/kekolu_big.png");
     String[] names = {
-      "Sugar Bunny Set", "Sunrise Bunny Set", "Service Bunny Set", "Snowy Bunny Set",
-      "Sunset Bunny Set", "Close Quarter Bunny Set", "Designated-Marksbunny Set", "Sleepy Bunny Set"
+      "Sugar Bunny Set", "Sunrise Bunny Set", "Service Bunny Set", "Academy Bunny Set",
+      "Blackjack Bunny Set", "Close Quarter Bunny Set", "Designated-Marksbunny Set", "Sleepy Bunny Set"
     };
     for (int i = 0; i < 8; i++) {
       outfit_names[i] = names[i];
