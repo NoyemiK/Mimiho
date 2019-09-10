@@ -40,12 +40,12 @@ void keyPressed() {
   if (key == 'a') { game.input("SKILL"); }
   if (key == 's') { game.input("GUN"); }
   if (key == ESC) { key = 0; game.input("CANCEL");}
+  if (key == '[') { game.volume_down(); }
+  if (key == ']') { game.volume_up(); }
   else if (key == CODED) {
     if (keyCode == UP) { game.input("UP"); }
     if (keyCode == DOWN) { game.input("DOWN"); }
     if (keyCode == LEFT) { game.input("LEFT"); }
     if (keyCode == RIGHT) { game.input("RIGHT"); }
-    if (keyCode == ALT) { game.volume_down(); }
-    if (keyCode == CONTROL) { game.volume_up(); }
   }
 }

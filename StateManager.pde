@@ -40,7 +40,7 @@ class Game {
   
   void draw_volume(int x, int y) {
     
-    text("VOLUME: " + (10 - persistent_data[6]) + "\nALT: -\nCTRL: +", x, y);
+    text("VOLUME: " + (10 - persistent_data[6]) + "\npress [: VOL-\npress ]: VOL+", x, y);
   }
   
   void volume_up() {
