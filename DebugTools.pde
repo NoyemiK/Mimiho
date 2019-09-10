@@ -105,10 +105,12 @@ class DebugMenu implements GameState {
   void input_confirm() {
     switch (selection_index) {
        case 0:
+         unlock_outfits();
          break;
        case 1:
          break;
        case 2:
+         max_tokens();
          break;
        case 3:
          gen_progression_table();
@@ -121,5 +123,18 @@ class DebugMenu implements GameState {
   
   void input_cancel() {
       game.pop_gamestate();
+  }
+  
+  void unlock_outfits() {
+    game.persistent_data[1] = 0x07;
+    game.persistent_data[2] = 0x07;
+    save_persistent_data(game);
+    println("All outfits unlocked!");
+  }
+  
+  void max_tokens() {
+    game.persistent_data[3] = 0xFF;
+    save_persistent_data(game);
+    println("Tokencount is now maxed!");
   }
 }
