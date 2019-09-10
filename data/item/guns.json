@@ -1,0 +1,78 @@
+{
+    "pistols":[
+        {
+            "name":"MP Special",
+            "desc":"A reproduction of an old Imperial police revolver that uses 6 rounds of 8x20mm Old Service in moon clips.",
+            "min_dmg": 8,
+            "max_dmg": 25,
+            "range": 4,
+            "capacity": 6,
+            "price": 200
+        },
+        {
+            "name":"FA Compact",
+            "desc":"A compact, modified DAP-19C that feeds .357 DAP from a double-stack magazine.",
+            "min_dmg": 8,
+            "max_dmg": 50,
+            "range": 4,
+            "capacity": 10,
+            "price": 525
+        },
+        {
+            "name":"FA Platinum",
+            "desc":"A limited edition courtesy of the famed gunsmith Yalmun Noriho. It feeds .41 PAC.",
+            "min_dmg": 32,
+            "max_dmg": 72,
+            "range": 5,
+            "capacity": 7,
+            "price": 2800
+        },
+        {
+            "name":"Charger",
+            "desc":"Amihailu's personal firearm, chambered in .458 Murenbi. Commissioned from the gunsmith Yalmun Noriho.",
+            "min_dmg": 64,
+            "max_dmg": 154,
+            "range": 6,
+            "capacity": 6,
+            "price": 8000
+        }
+    ],
+    "rifles":[
+        {
+            "name":"Varminter 1910",
+            "desc":"An accurate lever-action plinker. Uses 6mm Brushmaster.",
+            "min_dmg": 12,
+            "max_dmg": 32,
+            "range": 7,
+            "capacity": 5,
+            "price": 900
+        },
+        {
+            "name":"Fumihao Frontier",
+            "desc":"A Galwi lever-gun pattern from the 1890s that uses the old .30 Government round.",
+            "min_dmg": 28,
+            "max_dmg": 64,
+            "range": 7,
+            "capacity": 4,
+            "price": 2100
+        },
+        {
+            "name":"Tanunjon 1909",
+            "desc":"A famous and ubiquitous Galwi bolt-action rifle chambered in 8x57mm Imperial.",
+            "min_dmg": 40,
+            "max_dmg": 96,
+            "range": 8,
+            "capacity": 5,
+            "price": 2900
+        },
+        {
+            "name":"Yalmun Special 2X",
+            "desc":"A frighteningly powerful O/U double rifle that uses a wildcat 12.7mm cartridge developed by Yalmun Noriho.",
+            "min_dmg": 110,
+            "max_dmg": 180,
+            "range": 7,
+            "capacity": 5,
+            "price": 8000
+        }
+    ]
+}
