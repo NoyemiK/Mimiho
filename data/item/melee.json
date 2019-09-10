@@ -1,0 +1,51 @@
+{
+    "hand": [
+        {
+            "name": "Untrained",
+            "desc": "Basic, poorly-formed punches and kicks make up your entire repertoire.",
+            "damage": 4,
+            "exp_cost": 0,
+            "amihailu_only": false
+        },
+        {
+            "name": "Basic Kickboxing",
+            "desc": "Knowing how to throw your weight around allows you to concentrate force properly while also saving energy with your movements.",
+            "damage": 8,
+            "exp_cost": 500,
+            "amihailu_only": false
+        },
+        {
+            "name": "Sanaite CQC",
+            "desc": "Hell priestess hand-to-hand techniques, imbued with sacred blessings that multiplies the force of your blows against primordial demons.",
+            "damage": 16,
+            "exp_cost": 2600,
+            "amihailu_only": true
+        }
+    ],
+    "weapons": [
+        {
+            "name": "Club",
+            "desc": "A stick that's kinda heavy on one end. Doesn't have an edge to wear out.",
+            "damage": 8,
+            "durability": -1,
+            "price": 100,
+            "amihailu_only": false
+        },
+        {
+            "name": "Hatchet",
+            "desc": "A small axe. It's handy and light, but it gives good leverage for savage strikes.",
+            "damage": 20,
+            "durability": 16,
+            "price": 500,
+            "amihailu_only": false
+        },
+        {
+            "name": "Jon-Kiyo",
+            "desc": "It's a curved greatsword that can reportedly chop a horse in half. It's too heavy for Kekolu to use.",
+            "damage": 50,
+            "durability": 20,
+            "price": 2200,
+            "amihailu_only": true
+        }
+    ]
+}
